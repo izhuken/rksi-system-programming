@@ -1,0 +1,1 @@
+int find(int *array, int size, bool (*condition)(int, int));

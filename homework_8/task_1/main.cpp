@@ -1,6 +1,5 @@
 #include <iostream>
-#include "task_1.h"
-#include "common.h"
+#include "lib.h"
 
 using namespace std;
 

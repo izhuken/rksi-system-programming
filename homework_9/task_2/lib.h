@@ -1,0 +1,1 @@
+int reduce(int *array, int size, bool (*cond)(int));
