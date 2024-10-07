@@ -6,8 +6,8 @@
       "command": "/usr/bin/g++",
       "args": [
         "-g",
-        // "${fileDirname}/*.cpp",
-        "${file}",
+        "${fileDirname}/*.cpp",
+        // "${file}",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}"
       ],
