@@ -1,48 +1,40 @@
 #include <iostream>
 #include <cstring>
+#include <regex>
 
 using namespace std;
 
-char *decrypt(char *encrypted_string, int shift)
+char decrypt_symbol(char symbol, int shift);
+char encrypt_symbol(char symbol, int shift);
+
+char caesarCipher(char ch, int shift, bool encrypt)
 {
-    char *decoded_string = new char[2];
-
-    for (int i = 0; i < strlen(encrypted_string); i++)
+    if (encrypt)
     {
-        char symbol = encrypted_string[i];
-
-        if (isupper(symbol))
-        {
-            int decoded_char_code = int(symbol - shift - 65) % 26 + 65;
-            decoded_string[i] = char(decoded_char_code);
-            continue;
-        }
-        int decoded_char_code = int(symbol - shift - 97) % 26 + 97;
-        decoded_string[i] = char(decoded_char_code);
-        continue;
+        return encrypt_symbol(ch, shift);
     }
-
-    return decoded_string;
+    return decrypt_symbol(ch, shift);
 }
 
-char *encrypt(char *raw_string, int shift)
+char decrypt_symbol(char symbol, int shift)
 {
-    char *encrypted_string = new char[2];
-
-    for (int i = 0; i < strlen(raw_string); i++)
+    if (isupper(symbol))
     {
-        char symbol = raw_string[i];
+        int decoded_char_code = int(symbol - shift - 65) % 26 + 65;
+        return char(decoded_char_code);
+    }
+    int decoded_char_code = int(symbol - shift - 97) % 26 + 97;
+    return char(decoded_char_code);
+}
 
-        if (isupper(symbol))
-        {
-            int encrypted_char_code = int(symbol + shift - 65) % 26 + 65;
-            encrypted_string[i] = char(encrypted_char_code);
-            continue;
-        }
-        int encrypted_char_code = int(symbol + shift - 97) % 26 + 97;
-        encrypted_string[i] = char(encrypted_char_code);
-        continue;
+char encrypt_symbol(char symbol, int shift)
+{
+    if (isupper(symbol))
+    {
+        int encrypted_char_code = int(symbol + shift - 65) % 26 + 65;
+        return char(encrypted_char_code);
     }
 
-    return encrypted_string;
+    int encrypted_char_code = int(symbol + shift - 97) % 26 + 97;
+    return char(encrypted_char_code);
 }

@@ -1,1 +1,0 @@
-int router(char mode[]);

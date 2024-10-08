@@ -1,21 +1,38 @@
-#include "router/router.h"
 #include <iostream>
+#include "branches/branches.h"
 
 using namespace std;
 
 int main()
 {
-    int router_status_code;
-    char *mode = new char[1];
+    char mode;
+    bool isWorking = true;
 
     cout << "Добро пожаловать в Ceasar CLI encryptor" << endl;
-    cout << "Введите режим (D - расшифровать строку, E - зашифровать строку): ";
 
-    cin >> mode;
+    while (isWorking)
+    {
 
-    router_status_code = router(mode);
+        cout << "Введите режим (D - расшифровать строку, E - зашифровать строку): ";
+        cin >> mode;
 
-    delete[] mode;
+        switch (mode)
+        {
+        case 'd':
+        case 'D':
+            decrypt_branch();
+            break;
+        case 'e':
+        case 'E':
+            encrypt_branch();
+            break;
+        default:
+            isWorking = false;
+            break;
+        }
+    }
+
+    cout << "Спасибо за использование программы! " << "До свидания!" << endl;
 
     return 0;
 }
