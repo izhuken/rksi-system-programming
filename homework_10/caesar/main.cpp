@@ -5,13 +5,13 @@ using namespace std;
 
 int main()
 {
-    char mode;
     bool isWorking = true;
 
     cout << "Добро пожаловать в Ceasar CLI encryptor" << endl;
 
     while (isWorking)
     {
+        char mode;
 
         cout << "Введите режим (D - расшифровать строку, E - зашифровать строку): ";
         cin >> mode;
