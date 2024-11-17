@@ -1,8 +1,5 @@
-compile_lin:
-	g++ -g main.cpp -o main 
+debug_client:
+	g++ -g client.cpp -o client && ./client && rm client
 
-compile_win:
-	g++ -g main.cpp -o main.exe
-
-debug:
-	g++ -g main.cpp -o main && ./main && rm main
+debug_server:
+	g++ -g server.cpp -o server && ./server && rm server
