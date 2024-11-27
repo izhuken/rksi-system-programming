@@ -144,38 +144,45 @@ int main()
             game.displayBoard();
             int row, col;
 
-            string prompt = "Игрок " + to_string(player) + ", введите координаты (стока и колонка): ";
-            send(new_socket, prompt.c_str(), prompt.size(), 0);
+            char prompt[100];
+            snprintf(prompt, sizeof(prompt), "Игрок %d, введите координаты (строка и колонка): ", player);
+            send(new_socket, prompt, strlen(prompt), 0);
 
             char buffer[1024] = {0};
             int valread = read(new_socket, buffer, sizeof(buffer));
-            string move(buffer, valread);
-            sscanf(move.c_str(), "%d %d", &row, &col);
+
+            char move[100];
+
+            strncpy(move, buffer, valread);
+            move[valread] = '\0';
+            sscanf(move, "%d %d", &row, &col);
 
             if (game.makeMove(row, col))
             {
                 if (game.checkWin())
                 {
                     game.displayBoard();
-                    string winMessage = "Игрок " + to_string(player) + " победил!";
-                    send(new_socket, winMessage.c_str(), winMessage.size(), 0);
+                    char winMessage[100];
+                    snprintf(winMessage, sizeof(winMessage), "Игрок %d победил!", player);
+                    send(new_socket, winMessage, strlen(winMessage), 0);
                     break;
                 }
                 if (game.isDraw())
                 {
                     game.displayBoard();
-                    string drawMessage = "Ничья!";
-                    send(new_socket, drawMessage.c_str(), drawMessage.size(), 0);
+                    const char *drawMessage = "Ничья!";
+                    send(new_socket, drawMessage, strlen(drawMessage), 0);
                     break;
                 }
 
-                string nextPlayerMessage = "Ход игрока " + to_string(3 - player);
-                send(new_socket, nextPlayerMessage.c_str(), nextPlayerMessage.size(), 0);
+                char nextPlayerMessage[100];
+                snprintf(nextPlayerMessage, sizeof(nextPlayerMessage), "Ход игрока %d", 3 - player);
+                send(new_socket, nextPlayerMessage, strlen(nextPlayerMessage), 0);
             }
             else
             {
-                string invalidMoveMessage = "Некорректный ход. Попробуйте снова.";
-                send(new_socket, invalidMoveMessage.c_str(), invalidMoveMessage.size(), 0);
+                const char *invalidMoveMessage = "Некорректный ход. Попробуйте снова.";
+                send(new_socket, invalidMoveMessage, strlen(invalidMoveMessage), 0);
             }
         }
 

@@ -52,8 +52,9 @@ int main()
             cout << "Сделайте ход (строка и столбец): ";
             cin >> row >> col;
 
-            string move = to_string(row) + " " + to_string(col) + "\n";
-            send(sock, move.c_str(), move.size(), 0);
+            char move[20];
+            snprintf(move, sizeof(move), "%d %d\n", row, col);
+            send(sock, move, strlen(move), 0);
         }
     }
 
