@@ -4,9 +4,7 @@ using namespace std;
 
 Teenager::Teenager() : Teenager("undefined", "undefined", 0, 0, 0, 0, "undefined", "undefined") {}
 
-Teenager::~Teenager()
-{
-}
+Teenager::~Teenager() {}
 
 Teenager::Teenager(string name, string surname, int age, int weight, int height, int course, string job, string pet) : IHuman(name, surname, age, weight, height), Child(course), Adult(job), _pet(correctAlpha(pet)) {}
 
@@ -106,7 +104,7 @@ void Teenager::readFromConsole()
 void Teenager::writeToFile()
 {
     ofstream out;
-    out.open("Human.txt", ios::app);
+    out.open("human.txt", ios::app);
     if (out.is_open())
     {
         out << "Имя: " << getName() << endl

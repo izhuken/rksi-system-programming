@@ -93,7 +93,7 @@ void Adult::readFromConsole()
 void Adult::writeToFile()
 {
     ofstream out;
-    out.open("Human.txt", ios::app);
+    out.open("human.txt", ios::app);
     if (out.is_open())
     {
         out << "Имя: " << getName() << endl
