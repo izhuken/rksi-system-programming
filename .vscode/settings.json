@@ -50,7 +50,8 @@
     "ctime": "cpp",
     "regex": "cpp",
     "iomanip": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "fstream": "cpp"
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "ms-vscode.cpptools"
