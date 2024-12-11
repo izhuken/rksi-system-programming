@@ -1,17 +1,15 @@
 #pragma once
 
-#include "client.h"
+#include "play.h"
 #include "db_accessor.h"
 
 #include <string>
 #include <iostream>
 
-using namespace std;
-
-class ClientListener
+class PlayListener
 {
 public:
-    ClientListener(DBAccessor *db_accessor);
+    PlayListener(DBAccessor *db_accessor);
 
     void command();
 
@@ -19,5 +17,4 @@ private:
     DBAccessor *db_accessor;
     void display_all();
     void create();
-    void transaction();
 };

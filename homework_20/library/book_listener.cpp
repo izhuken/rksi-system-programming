@@ -1,7 +1,6 @@
 #include "book_listener.h"
 #include "book.h"
 #include "db_accessor.h"
-#include "dto.h"
 
 #include <string>
 #include <iostream>

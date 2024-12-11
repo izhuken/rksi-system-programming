@@ -72,11 +72,11 @@ void ClientListener::transaction()
     string client_name;
     cin >> client_name;
 
-    cout << "Введите имя книги: ";
-    string book_name;
-    cin >> book_name;
+    cout << "Введите имя спектакля: ";
+    string play_name;
+    cin >> play_name;
 
-    bool result = this->db_accessor->book_transaction(client_name, book_name);
+    bool result = this->db_accessor->ticket_transaction(client_name, play_name);
 
     if (!result)
     {
