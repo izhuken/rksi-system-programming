@@ -2,6 +2,8 @@
 
 class Entity
 {
-public:
-    virtual void display();
+    virtual int get_id();
+
+private:
+    int id;
 };

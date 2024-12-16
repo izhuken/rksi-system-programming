@@ -1,3 +1,3 @@
 #include "entity.h"
 
-void Entity::display() {};
+int Entity::get_id() {};

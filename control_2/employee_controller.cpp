@@ -25,6 +25,7 @@ crow::json::wvalue EmployeeController::get_all()
     for (int i = 0; i < employee_count; i++)
     {
         crow::json::wvalue _x;
+        _x["id"] = employees[i]->get_id();
         _x["name"] = employees[i]->get_name();
         _x["phone"] = employees[i]->get_phone();
         _x["employment_day"] = employees[i]->get_employment_day();
@@ -34,26 +35,21 @@ crow::json::wvalue EmployeeController::get_all()
     return array;
 }
 
-crow::json::wvalue EmployeeController::get_by_name(string name)
+crow::json::wvalue EmployeeController::get_by_id(int id)
 {
     crow::json::wvalue result;
 
-    int employee_count = this->db_accessor->get_employee_count();
-    Employee **employees = this->db_accessor->get_employees();
+    Employee *employee = this->db_accessor->get_employee_by_id(id);
 
-    for (int i = 0; i < employee_count; i++)
+    if (employee == NULL)
     {
-        Employee *current = employees[i];
-
-        if (current->get_name() == name)
-        {
-            result["name"] = current->get_name();
-            result["phone"] = current->get_phone();
-            result["employment_day"] = current->get_employment_day();
-            break;
-        }
+        return NULL;
     }
 
+    result["id"] = employee->get_id();
+    result["name"] = employee->get_name();
+    result["phone"] = employee->get_phone();
+    result["employment_day"] = employee->get_employment_day();
     return result;
 }
 
@@ -62,6 +58,7 @@ crow::json::wvalue EmployeeController::create(CreateEmployeeDTO payload)
     Employee *employee = this->db_accessor->create_employee(payload.name, payload.phone);
 
     crow::json::wvalue result;
+    result["id"] = employee->get_id();
     result["name"] = employee->get_name();
     result["phone"] = employee->get_phone();
     result["employment_day"] = employee->get_employment_day();
