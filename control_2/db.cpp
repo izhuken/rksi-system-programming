@@ -22,6 +22,8 @@ DB::DB()
 DB::~DB()
 {
     delete[] this->employees;
+    delete[] this->products;
+    delete[] this->menu_items;
 };
 
 void DB::append_employee(Employee *employee)

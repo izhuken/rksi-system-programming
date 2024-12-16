@@ -26,3 +26,8 @@ int Product::get_quantity()
 {
     return quantity;
 }
+
+void Product::set_quantity(int quantity)
+{
+    this->quantity = quantity;
+}

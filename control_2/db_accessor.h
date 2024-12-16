@@ -26,6 +26,8 @@ public:
     Product **get_products();
     Product *get_product_by_id(int id);
     Product *create_product(string name, int quantity);
+    bool prepare_product_quantity(int id, int quantity);
+    void decrease_product_quantity(int id, int quantity);
 
     int get_menu_item_count();
     MenuItem **get_menu_items();

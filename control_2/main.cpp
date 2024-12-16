@@ -1,5 +1,6 @@
 #include "dto.h"
 #include "crow_all.h"
+#include "transaction_controller.h"
 #include "menu_item_controller.h"
 #include "product_controller.h"
 #include "employee_controller.h"
@@ -17,6 +18,7 @@ int main()
     EmployeeController *employee_controller = new EmployeeController(db_accessor);
     ProductController *product_controller = new ProductController(db_accessor);
     MenuItemController *menu_item_controller = new MenuItemController(db_accessor);
+    TransactionController *transaction_controller = new TransactionController(db_accessor);
 
     crow::SimpleApp app;
 
@@ -64,7 +66,7 @@ int main()
 
         return product_controller->create(create_product_dto); });
 
-    CROW_ROUTE(app, "/menu_item")
+    CROW_ROUTE(app, "/menu")
     ([&]()
      { return menu_item_controller->get_all(); });
 
@@ -90,6 +92,18 @@ int main()
 
         std::cout << std::endl;
         return menu_item_controller->create(create_menu_item_dto); });
+
+    CROW_ROUTE(app, "/transaction")
+        .methods(crow::HTTPMethod::POST)([&](crow::request req)
+                                         {
+            auto json_body = crow::json::load(req.body);
+
+            CreateTransactionDTO create_transaction_dto;
+
+            create_transaction_dto.menu_item_id = json_body["menu_item_id"].i();
+            create_transaction_dto.quantity = json_body["quantity"].i();
+
+            return transaction_controller->create(create_transaction_dto); });
 
     app.port(8080).run();
 

@@ -101,6 +101,30 @@ int DBAccessor::get_product_count()
     return this->db->get_product_count();
 }
 
+bool DBAccessor::prepare_product_quantity(int id, int quantity)
+{
+    Product *product = this->get_product_by_id(id);
+
+    if (product == NULL || product->get_quantity() < quantity)
+    {
+        return false;
+    }
+
+    return true;
+};
+
+void DBAccessor::decrease_product_quantity(int id, int quantity)
+{
+    Product *product = this->get_product_by_id(id);
+
+    if (product == NULL || product->get_quantity() < quantity)
+    {
+        return;
+    }
+
+    product->set_quantity(product->get_quantity() - quantity);
+};
+
 MenuItem *DBAccessor::create_menu_item(string name, int cost, vector<int> product)
 {
     for (int &id : product)

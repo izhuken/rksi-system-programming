@@ -27,3 +27,9 @@ struct CreateMenuItemDTO : BaseDTO
     int cost;
     vector<int> product;
 };
+
+struct CreateTransactionDTO : BaseDTO
+{
+    int menu_item_id;
+    int quantity;
+};

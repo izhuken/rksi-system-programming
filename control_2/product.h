@@ -16,6 +16,8 @@ public:
     string get_name();
     int get_quantity();
 
+    void set_quantity(int quantity);
+
 private:
     int id;
     string name;
