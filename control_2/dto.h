@@ -4,7 +4,11 @@
 
 using namespace std;
 
-struct CreateEmployeeDTO
+struct BaseDTO
+{
+};
+
+struct CreateEmployeeDTO : BaseDTO
 {
     string name;
     string phone;

@@ -22,6 +22,10 @@ int main()
     ([&]()
      { return employee_controller->get_all(); });
 
+    CROW_ROUTE(app, "/employee/<string>")
+    ([&](string name)
+     { return employee_controller->get_by_name(name); });
+
     CROW_ROUTE(app, "/employee/create")
         .methods(crow::HTTPMethod::POST)([&](crow::request req)
                                          {

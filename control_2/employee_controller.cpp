@@ -34,6 +34,29 @@ crow::json::wvalue EmployeeController::get_all()
     return array;
 }
 
+crow::json::wvalue EmployeeController::get_by_name(string name)
+{
+    crow::json::wvalue result;
+
+    int employee_count = this->db_accessor->get_employee_count();
+    Employee **employees = this->db_accessor->get_employees();
+
+    for (int i = 0; i < employee_count; i++)
+    {
+        Employee *current = employees[i];
+
+        if (current->get_name() == name)
+        {
+            result["name"] = current->get_name();
+            result["phone"] = current->get_phone();
+            result["employment_day"] = current->get_employment_day();
+            break;
+        }
+    }
+
+    return result;
+}
+
 crow::json::wvalue EmployeeController::create(CreateEmployeeDTO payload)
 {
     Employee *employee = this->db_accessor->create_employee(payload.name, payload.phone);
